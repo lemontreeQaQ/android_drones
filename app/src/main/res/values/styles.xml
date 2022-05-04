@@ -1,0 +1,16 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/black_2c</item>
+        <item name="colorPrimaryDark">@color/black_2c</item>
+        <item name="colorAccent">@color/black_2c</item>
+    </style>
+
+    <declare-styleable name="Search_View"><attr format="dimension" name="textSizeSearch"/><attr format="color" name="textColorSearch"/><attr format="string" name="textHintSearch"/><attr format="integer" name="searchBlockHeight"/><attr format="color" name="searchBlockColor"/></declare-styleable>
+
+
+
+
+</resources>

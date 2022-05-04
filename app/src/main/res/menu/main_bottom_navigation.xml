@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_weather"
+        android:enabled="true"
+        android:icon="@drawable/weather0"
+        app:showAsAction="ifRoom"
+        android:title="天气" />
+    <item
+        android:id="@+id/menu_type"
+        android:enabled="true"
+        android:icon="@drawable/type"
+        app:showAsAction="ifRoom"
+        android:title="机型" />
+    <item
+        android:id="@+id/menu_detect"
+        android:enabled="true"
+        android:icon="@drawable/detect"
+        app:showAsAction="ifRoom"
+        android:title="检测" />
+    <item
+        android:id="@+id/menu_location"
+        android:enabled="true"
+        android:icon="@drawable/location"
+        app:showAsAction="ifRoom"
+        android:title="定位" />
+    <item
+        android:id="@+id/menu_mine"
+        android:enabled="true"
+        android:icon="@drawable/mine"
+        app:showAsAction="ifRoom"
+        android:title="我的" />
+
+</menu>
