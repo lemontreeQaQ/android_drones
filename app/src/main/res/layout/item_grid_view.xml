@@ -18,14 +18,14 @@
                 android:id="@+id/grid_view_icon"
                 android:layout_width="200dp"
                 android:layout_height="150dp"
-                android:src="@drawable/weather1"
+                android:src="@drawable/type7"
                 android:scaleType="fitXY"
                 android:layout_centerHorizontal="true"/>
 
             <ImageView
                 android:id="@+id/grid_view_check"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/check"
                 android:visibility="invisible"/>
 

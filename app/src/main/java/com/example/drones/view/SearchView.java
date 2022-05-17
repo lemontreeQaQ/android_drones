@@ -1,6 +1,8 @@
 package com.example.drones.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -20,7 +22,14 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
 import com.example.drones.R;
+import com.example.drones.utils.BridgeDesc;
+
+import java.util.HashMap;
+import java.util.Map;
 
 //import scut.carson_ho.searchview.ICallBack;
 //import scut.carson_ho.searchview.RecordSQLiteOpenHelper;
@@ -35,6 +44,9 @@ public class SearchView extends LinearLayout {
      * 初始化成员变量
      */
     private Context context;
+
+    private Map<String,String> dMap = new HashMap<>();
+    private SwitchListener switchListener;
 
     // 搜索框组件
     private EditText et_search; // 搜索按键
@@ -135,6 +147,8 @@ public class SearchView extends LinearLayout {
         deleteData();
         mockDate();
 
+        dMap.put("重庆长江大桥", BridgeDesc.cqcjdq);
+
 
         // 3. 第1次进入时查询所有的历史搜索记录
         queryData("");
@@ -171,12 +185,12 @@ public class SearchView extends LinearLayout {
                     Toast.makeText(context, "需要搜索的是" + et_search.getText(), Toast.LENGTH_SHORT).show();
 
                     // 2. 点击搜索键后，对该搜索字段在数据库是否存在进行检查（查询）->> 关注1
-                    boolean hasData = hasData(et_search.getText().toString().trim());
-                    // 3. 若存在，则不保存；若不存在，则将该搜索字段保存（插入）到数据库，并作为历史搜索记录
-                    if (!hasData) {
-                        insertData(et_search.getText().toString().trim());
-                        queryData("");
-                    }
+//                    boolean hasData = hasData(et_search.getText().toString().trim());
+//                    // 3. 若存在，则不保存；若不存在，则将该搜索字段保存（插入）到数据库，并作为历史搜索记录
+//                    if (!hasData) {
+//                        insertData(et_search.getText().toString().trim());
+//                        queryData("");
+//                    }
                 }
                 return false;
             }
@@ -221,11 +235,43 @@ public class SearchView extends LinearLayout {
                 TextView textView = (TextView) view.findViewById(android.R.id.text1);
                 String name = textView.getText().toString();
                 et_search.setText(name);
-                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
+                String tmpDesc = null;
+                tmpDesc = dMap.get(name);
+                if(tmpDesc==null){
+                    tmpDesc="未定义描述";
+                }
+                new AlertDialog.Builder(getContext())
+                        .setTitle(name)
+                        .setMessage(tmpDesc)
+                        .setPositiveButton("路径生成", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+//                                Toast.makeText(getContext(),"111",Toast.LENGTH_SHORT).show();
+                                if(switchListener!=null){
+                                    switchListener.onClick();
+                                }
+                            }
+                        })
+                        .setNegativeButton("取消选择", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .show();
             }
         });
 
 
+    }
+
+    public interface SwitchListener{
+        void onClick();
+    }
+
+    public void setSwitchListener(SwitchListener switchListener){
+        this.switchListener = switchListener;
     }
 
 
@@ -239,7 +285,7 @@ public class SearchView extends LinearLayout {
 
         // 2. 绑定搜索框EditText
         et_search = (EditText) findViewById(R.id.et_search);
-        et_search.setTextSize(textSizeSearch);
+        et_search.setTextSize(15);
         et_search.setTextColor(textColorSearch);
         et_search.setHint("搜索桥梁名");
 
